@@ -1,0 +1,8 @@
+{
+    "vmotion": "vMotion allows live migration of running VMs between hosts with zero downtime.",
+    "snapshot": "Snapshots save a VM's state. Recommendation: Delete them within 72 hours to prevent performance issues.",
+    "high availability": "vSphere HA provides automatic failover if a host hardware or OS fails.",
+    "drs": "DRS (Distributed Resource Scheduler) balances computing resources across VMs in a cluster.",
+    "vcenter": "vCenter Server is the central management platform for your vSphere environment.",
+    "hello": "Hello Admin! I can help with vMotion, Snapshots, HA, and more."
+}
