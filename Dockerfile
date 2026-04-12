@@ -1,4 +1,4 @@
 # Use your specific image from Artifactory as the base
 FROM ninetyone.jfrog.io/infra-openshift-images/nginx:latest
-COPY index.html /usr/share/nginx/html/index.html
+COPY . /usr/share/nginx/html/
 EXPOSE 8080
