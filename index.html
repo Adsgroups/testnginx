@@ -1,6 +1,69 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VMware Admin Bot</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        #chat-container { width: 350px; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; }
+        #chat-window { height: 300px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #ddd; }
+        .msg { padding: 8px 12px; border-radius: 15px; font-size: 14px; max-width: 80%; }
+        .bot { background: #007cbb; color: white; align-self: flex-start; }
+        .user { background: #e4e6eb; color: #050505; align-self: flex-end; }
+        #input-area { display: flex; padding: 10px; }
+        #user-input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        #send-btn { margin-left: 5px; background: #62ac44; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
 <body>
-    <h1>Arundev</h1>
+
+<div id="chat-container">
+    <div id="chat-window" id="display"></div>
+    <div id="input-area">
+        <input type="text" id="user-input" placeholder="Ask about VMware...">
+        <button id="send-btn">Send</button>
+    </div>
+</div>
+
+<script>
+    let kb = {};
+
+    // Fetch the JSON file and parse it into an object
+    fetch('vmware_kb.json')
+        .then(res => res.json())
+        .then(data => kb = data)
+        .catch(err => console.error("Could not load KB:", err));
+
+    const chatWindow = document.getElementById('chat-window');
+    const input = document.getElementById('user-input');
+
+    function appendMessage(text, type) {
+        const div = document.createElement('div');
+        div.className = `msg ${type}`;
+        div.innerText = text;
+        chatWindow.appendChild(div);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    function handleSend() {
+        const query = input.value.trim().toLowerCase();
+        if (!query) return;
+
+        appendMessage(input.value, 'user');
+        input.value = '';
+
+        // Simple keyword matching from the JSON object
+        let reply = "I'm not sure. Try asking about vMotion or Snapshots.";
+        for (let key in kb) {
+            if (query.includes(key)) { reply = kb[key]; break; }
+        }
+
+        setTimeout(() => appendMessage(reply, 'bot'), 500);
+    }
+
+    document.getElementById('send-btn').onclick = handleSend;
+    input.onkeypress = (e) => { if(e.key === 'Enter') handleSend(); };
+</script>
+
 </body>
 </html>
