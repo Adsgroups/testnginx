@@ -1,4 +1,4 @@
-FROM ninetyone.jfrog.io/infra-openshift-images/nginx:latest
+FROM ninetyone.jfrog.io/infra-openshift-images-virtual/nginx:latest
  
 # Copy your web files
 COPY . /usr/share/nginx/html/
