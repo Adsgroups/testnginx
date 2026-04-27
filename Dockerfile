@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM registry.redhat.io/ubi9/nginx-126
  
 # Copy your web files
 COPY . /usr/share/nginx/html/
