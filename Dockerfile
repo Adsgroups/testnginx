@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi9/nginx-126
+FROM quay.io/sclorg/nginx-124-c9s
  
 # Copy your web files
 COPY . /usr/share/nginx/html/
