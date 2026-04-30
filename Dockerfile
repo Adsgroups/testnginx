@@ -1,4 +1,4 @@
-FROM quay.io/sclorg/nginx-124-c9s
+FROM nginx:latest
  
 # Copy your web files
 COPY . /usr/share/nginx/html/
